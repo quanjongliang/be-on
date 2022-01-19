@@ -15,6 +15,7 @@ import { AuthService } from '../services/auth.service';
 import { LocalAuthGuard } from '../guards';
 import JwtAuthGuard from '../guards/jwt-auth.guard';
 import { User } from 'src/user';
+import { CurrentUser } from 'src/decorators';
 
 @Controller('auth')
 export class AuthController {
@@ -22,8 +23,11 @@ export class AuthController {
 
   @UseGuards(JwtAuthGuard)
   @Get()
-  authenticate(@Req() request: RequestWithUser): User {
-    return request.user;
+  // authenticate(@Req() request: RequestWithUser): User {
+  //   return request.user;
+  // }
+  authenticate(@CurrentUser() user: User): User {
+    return user;
   }
 
   @Post('register')
@@ -43,7 +47,6 @@ export class AuthController {
     response.setHeader('Set-Cookie', cookie);
     return cookie;
   }
-
   @UseGuards(JwtAuthGuard)
   @Post('log-out')
   async logOut(

@@ -5,10 +5,8 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
 import { S3Service } from 'src/core';
 import { UserRepository } from 'src/repository';
-import { Repository } from 'typeorm';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UpdateUserDto } from '../dto/update-user.dto';
 import { User, UserAvatar } from '../entities/user.entity';

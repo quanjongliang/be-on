@@ -26,8 +26,9 @@ export class AvatarUploadInterceptor implements NestInterceptor {
       key: res.Key,
       url,
     };
+
     request.avatar = avatar;
-    console.log(url);
+
     return next.handle().pipe(
       map((value) => {
         return { ...value };

@@ -40,6 +40,7 @@ describe('User service', () => {
       username: 'quill',
       refreshToken: '',
       email: '',
+      isActive: false,
     },
   ];
 

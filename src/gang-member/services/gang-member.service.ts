@@ -1,9 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { CreateGangMemberDto } from './dto/create-gang-member.dto';
-import { UpdateGangMemberDto } from './dto/update-gang-member.dto';
+import { GangMember, User } from 'src/entities';
+import { GangMemberRepository } from 'src/repository';
+import { CreateGangMemberDto, UpdateGangMemberDto } from '../dto';
 
 @Injectable()
 export class GangMemberService {
+  constructor(private gangMemberRepo: GangMemberRepository) {}
+
   create(createGangMemberDto: CreateGangMemberDto) {
     return 'This action adds a new gangMember';
   }
@@ -22,5 +25,9 @@ export class GangMemberService {
 
   remove(id: number) {
     return `This action removes a #${id} gangMember`;
+  }
+
+  async getAllInvite(user: User): Promise<GangMember[]> {
+    return this.gangMemberRepo.find({ isDeleted: false, user });
   }
 }

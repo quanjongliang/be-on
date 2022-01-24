@@ -39,20 +39,21 @@ export class User extends BaseEntity {
   @Column({ nullable: true })
   refreshToken: string;
 
-  @Column({ enum: UserStatus })
+  @Column({ enum: UserStatus, default: UserStatus.ONLINE })
   status: UserStatus;
 
   @Column({ default: '' })
   message: string;
 
-  @OneToOne(() => Gang, (g) => g.owner)
+  @OneToOne(() => Gang, (g) => g.owner, { nullable: true })
   @JoinColumn()
   gang: Gang;
 
   @OneToMany(() => Post, (post) => post.user)
   posts: Post[];
 
-  @OneToOne(() => GangMember, (gM) => gM.user)
+  @OneToOne(() => GangMember, (gM) => gM.user, { nullable: true })
+  @JoinColumn()
   gangMember: GangMember;
 }
 

@@ -3,7 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { JWT } from 'src/core';
 import { UserRepository } from 'src/repository';
-import { User } from 'src/entities';
+import { User, UserStatus } from 'src/entities';
 import { getCookieToken, TokenPayload } from '..';
 import { LoginDto, RegisterUserDto } from '../dto';
 
@@ -38,7 +38,11 @@ export class AuthService {
         );
       }
     }
-    return this.userRepository.save(registerDto);
+    const createUser = await this.userRepository.save({
+      ...registerDto,
+      status: UserStatus.ONLINE,
+    });
+    return { ...createUser, password: '' };
   }
 
   async loginUser(loginDto: LoginDto) {

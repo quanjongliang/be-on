@@ -1,5 +1,5 @@
 import { IsNotEmpty, IsOptional, Length } from 'class-validator';
-import { GANG_MESSAGE } from '..';
+import { GANG_MESSAGE } from '../core';
 
 export class CreateGangDto {
   @IsNotEmpty({ message: GANG_MESSAGE.NAME.NOT_EMPTY })

@@ -28,7 +28,7 @@ export class CheckUserGang implements CanActivate {
       throw new HttpException(GANG_MESSAGE.USER.OWNER, HttpStatus.BAD_REQUEST);
     }
 
-    const gangMember = this.gangMemberRepo.findGangMemberById(user.id);
+    const gangMember = await this.gangMemberRepo.findGangMemberById(user.id);
     if (gangMember) throw new BadRequestException(GANG_MESSAGE.USER.EXIST);
 
     if (inviteUserId) {

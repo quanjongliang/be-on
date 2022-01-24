@@ -14,7 +14,7 @@ import { RegisterUserDto } from '../dto';
 import { AuthService } from '../services/auth.service';
 import { LocalAuthGuard } from '../guards';
 import JwtAuthGuard from '../guards/jwt-auth.guard';
-import { User } from 'src/user';
+import { User } from 'src/entities';
 import { CurrentUser } from 'src/decorators';
 
 @Controller('auth')

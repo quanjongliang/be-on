@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
-import { User, UserBla } from 'src/user/entities/user.entity';
+import { User } from 'src/entities/user.entity';
 
 @Injectable()
 export class LoggingInterceptor implements NestInterceptor {
@@ -18,7 +18,7 @@ export class LoggingInterceptor implements NestInterceptor {
 
     const now = Date.now();
     return next.handle().pipe(
-      map((value: UserBla[]) => {
+      map((value: User[]) => {
         console.log(value);
         console.log('value');
 

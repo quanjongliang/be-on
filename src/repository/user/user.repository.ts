@@ -1,6 +1,5 @@
+import { User } from 'src/entities';
 import { EntityRepository, Repository } from 'typeorm';
-
-import { User } from 'src/user';
 
 @EntityRepository(User)
 export class UserRepository extends Repository<User> {
@@ -15,5 +14,9 @@ export class UserRepository extends Repository<User> {
         { email: user, isDeleted: false },
       ],
     });
+  }
+
+  findOneById(id: string): Promise<User | undefined> {
+    return this.findOne({ id, isDeleted: false });
   }
 }

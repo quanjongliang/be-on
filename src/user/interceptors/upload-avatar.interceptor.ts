@@ -7,7 +7,7 @@ import {
 import { Observable } from 'rxjs';
 import { S3Service } from 'src/core';
 import { map } from 'rxjs/operators';
-import { UserAvatar } from '../entities';
+import { UserAvatar } from 'src/entities';
 
 @Injectable()
 export class AvatarUploadInterceptor implements NestInterceptor {

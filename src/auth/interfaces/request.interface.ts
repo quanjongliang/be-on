@@ -1,5 +1,10 @@
 import { Request } from 'express';
-import { User, UserAvatar } from 'src/user';
+import { Gang, User, UserAvatar } from 'src/entities';
+
+export interface RequestInterface extends RequestWithUser {
+  inviteUser: User;
+  currentGang: Gang;
+}
 
 export interface RequestWithUser extends Request {
   user: User;

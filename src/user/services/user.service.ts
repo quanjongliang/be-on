@@ -9,7 +9,7 @@ import { S3Service } from 'src/core';
 import { UserRepository } from 'src/repository';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UpdateUserDto } from '../dto/update-user.dto';
-import { User, UserAvatar } from '../entities/user.entity';
+import { User, UserAvatar } from '../../entities/user.entity';
 
 @Injectable()
 export class UserService {

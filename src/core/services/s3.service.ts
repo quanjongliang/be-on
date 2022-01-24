@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { S3 } from 'aws-sdk';
 import { randomUUID } from 'crypto';
 import * as fs from 'fs';
-import { ParamsAws } from 'src/user';
+import { ParamsAws } from 'src/entities';
 import { AWS_CONSTANTS } from '..';
 
 const s3 = new S3({

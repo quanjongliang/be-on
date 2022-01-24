@@ -3,7 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { JWT } from 'src/core';
 import { UserRepository } from 'src/repository';
-import { User } from 'src/user';
+import { User } from 'src/entities';
 import { getCookieToken, TokenPayload } from '..';
 import { LoginDto, RegisterUserDto } from '../dto';
 

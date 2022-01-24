@@ -13,7 +13,7 @@ import {
 import { UserService } from '../services/user.service';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UpdateUserDto } from '../dto/update-user.dto';
-import { User, UserAvatar, UserBla } from '../entities/user.entity';
+import { User, UserAvatar } from '../../entities/user.entity';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { CurrentAny, CurrentImage, CurrentUser } from 'src/decorators';
 import { AvatarUploadInterceptor } from '../interceptors';
@@ -60,7 +60,7 @@ export class UserController {
   findByUsername(
     @Param('username') username: string,
     @CurrentAny() any: any,
-  ): Promise<UserBla> {
+  ): Promise<User> {
     console.log(any);
     return this.userService.findByUsername(username);
   }

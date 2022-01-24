@@ -45,16 +45,18 @@ export class User extends BaseEntity {
   @Column({ default: '' })
   message: string;
 
-  @OneToOne(() => Gang, (g) => g.owner, { nullable: true })
+  @OneToMany(() => Gang, (g) => g.owner, { nullable: true })
   @JoinColumn()
-  gang: Gang;
+  gangs: Gang[];
+
+  @Column({ nullable: true })
+  currentGangId: string;
 
   @OneToMany(() => Post, (post) => post.user)
   posts: Post[];
 
-  @OneToOne(() => GangMember, (gM) => gM.user, { nullable: true })
-  @JoinColumn()
-  gangMember: GangMember;
+  @OneToMany(() => GangMember, (gM) => gM.user, { nullable: true })
+  gangMember: GangMember[];
 }
 
 export interface UserAvatar {

@@ -1,7 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { MessageString } from 'src/common';
 import { Gang, User } from 'src/entities';
-import { GangMemberRepository, GangRepository } from 'src/repository';
+import {
+  GangMemberRepository,
+  GangRepository,
+  UserRepository,
+} from 'src/repository';
 import { GANG_MESSAGE } from '..';
 import { UpdateGangDto, CreateGangDto } from '../dto';
 
@@ -10,9 +14,12 @@ export class GangService {
   constructor(
     private gangRepository: GangRepository,
     private gangMemberRepo: GangMemberRepository,
+    private userRepository: UserRepository,
   ) {}
-  create(user: User, createGang: CreateGangDto): Promise<Gang> {
-    return this.gangRepository.save({ owner: user, ...createGang });
+  async create(user: User, createGang: CreateGangDto): Promise<Gang> {
+    const gang = await this.gangRepository.save({ owner: user, ...createGang });
+    await this.userRepository.save({ ...user, currentGangId: gang.id });
+    return gang;
   }
 
   findAll() {

@@ -18,7 +18,7 @@ export class CheckMemberGang implements CanActivate {
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest<RequestInterface>();
     const { user } = request;
-    if (user.gang) {
+    if (user.currentGangId) {
       return false;
     }
     const gangMember = await this.gangMemberRepo.findGangMemberById(user.id);

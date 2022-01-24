@@ -9,7 +9,11 @@ import {
 import { Reflector } from '@nestjs/core';
 import { Observable } from 'rxjs';
 import { RequestInterface, RequestWithUser } from 'src/auth';
-import { GangMemberRepository, UserRepository } from 'src/repository';
+import {
+  GangMemberRepository,
+  GangRepository,
+  UserRepository,
+} from 'src/repository';
 import { USER_MESSAGE } from 'src/user';
 import { GANG_MESSAGE } from '..';
 
@@ -19,14 +23,19 @@ export class CheckRoleGang implements CanActivate {
     private reflector: Reflector,
     private gangMemberRepo: GangMemberRepository,
     private userRepo: UserRepository,
+    private gangRepository: GangRepository,
   ) {}
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const roles = this.reflector.get<string[]>('roles', context.getHandler());
     if (roles) return true;
     const request = context.switchToHttp().getRequest<RequestInterface>();
     const { user } = request;
-    if (user.gang) {
-      request.currentGang = user.gang;
+    if (user.currentGangId) {
+      const currentGang = await this.gangRepository.findOne({
+        id: user.currentGangId,
+        isDeleted: false,
+      });
+      request.currentGang = currentGang;
       return true;
     }
 

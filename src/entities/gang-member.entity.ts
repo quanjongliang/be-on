@@ -14,7 +14,7 @@ export class GangMember extends BaseEntity {
   @ManyToOne(() => Gang, (gang) => gang.members)
   gang: Gang;
 
-  @OneToOne(() => User, (u) => u.gangMember, { nullable: true, cascade: true })
+  @ManyToOne(() => User, (u) => u.gangMember, { nullable: true, cascade: true })
   user: User;
 
   @Column({ default: false })

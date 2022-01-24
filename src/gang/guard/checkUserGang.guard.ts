@@ -24,11 +24,11 @@ export class CheckUserGang implements CanActivate {
       user,
       params: { id: inviteUserId = '' },
     } = request;
-    if (user.gang) {
-      throw new HttpException(GANG_MESSAGE.USER.OWNER, HttpStatus.BAD_REQUEST);
-    }
+    // if (user.currentGangId) {
+    //   throw new HttpException(GANG_MESSAGE.USER.OWNER, HttpStatus.BAD_REQUEST);
+    // }
 
-    const gangMember = await this.gangMemberRepo.findGangMemberById(user.id);
+    const gangMember = await this.gangMemberRepo.findGangMemberByUser(user);
     if (gangMember) throw new BadRequestException(GANG_MESSAGE.USER.EXIST);
 
     if (inviteUserId) {
@@ -36,7 +36,7 @@ export class CheckUserGang implements CanActivate {
       if (!inviteUser)
         throw new BadRequestException(USER_MESSAGE.ERROR.NOT_FOUND);
 
-      if (inviteUser.gang)
+      if (inviteUser.gangs)
         throw new BadRequestException(GANG_MESSAGE.USER.OWNER);
 
       request.inviteUser = inviteUser;
